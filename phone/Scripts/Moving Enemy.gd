@@ -30,7 +30,7 @@ func _physics_process(delta):
 	if(playerRef.get_ref()):
 		
 		var dist = player.position - position
-		if (dist.x + dist.y < aggroRange):
+		if (abs(dist.x + dist.y) < aggroRange):
 			followPlayer = true
 		
 		if (followPlayer):

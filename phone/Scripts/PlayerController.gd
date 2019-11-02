@@ -8,11 +8,12 @@ var canShoot = true
 var bulletTimer
 var shotSpeed = .1
 
+var moving = false
+
 var rng = RandomNumberGenerator.new()
 
 var velocity = Vector2()
-var dir
-var rot_dir = 0
+var dir = Vector2(0,0)
 export (float) var rot_speed = 1.5
 
 # Called when the node enters the scene tree for the first time.
@@ -33,25 +34,32 @@ func get_input():
 	
 	if Input.is_action_pressed('ui_right'):
 		velocity.x += 1
+		moving = true
 	if Input.is_action_pressed('ui_left'):
 		velocity.x -= 1
-		print("left")
+		moving = true
 	if Input.is_action_pressed('ui_down'):
 		velocity.y += 1
+		moving = true
 	if Input.is_action_pressed('ui_up'):
 		velocity.y -= 1
-		print("up")
-		
+		moving = true
+	
 	dir = velocity.normalized()
 	
 	if Input.is_action_pressed('ui_accept') && canShoot:
 		shoot()
-		print("pew pew " + String(rng.randf_range(1, 100)))
 	
 
 func _physics_process(delta):
+	
+	moving = false
+	
 	get_input()
-	get_node("PlayerSprite").rotation = dir.angle() + deg2rad(90)
+	if moving: 
+		get_node("PlayerSprite").rotation = dir.angle() + deg2rad(90)
+	else: 
+		get_node("PlayerSprite").rotation = deg2rad(0)
 	move_and_slide(dir * speed)
 	
 func shoot():
@@ -62,7 +70,10 @@ func shoot():
 	
 	var bullet = bullet_scene.instance()
 	#bullet.fire(self.global_position + velocity * 30, velocity.angle())
-	bullet.fire(self.global_position + dir * 30, dir.angle())
+	if (moving):
+		bullet.fire(self.global_position + dir * 30, dir.angle())
+	else:
+		bullet.fire(self.global_position + Vector2(0,30), deg2rad(270))
 	get_parent().add_child(bullet)
 
 
