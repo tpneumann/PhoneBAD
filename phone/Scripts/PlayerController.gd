@@ -5,6 +5,8 @@ extends KinematicBody2D
 # var b = "text"
 
 export (int) var speed = 200
+onready var bullet_scene = preload("res://Bullet.tscn")
+
 
 var velocity = Vector2()
 var rot_dir = 0
@@ -31,7 +33,10 @@ func get_input():
 		velocity.y += 1
 	if Input.is_action_pressed('ui_up'):
 		velocity.y -= 1
+	if Input.is_action_just_pressed('ui_accept'):
+		shoot()
 	velocity = velocity.normalized() * speed
+	
 
 func _physics_process(delta):
 	get_input()
@@ -39,4 +44,21 @@ func _physics_process(delta):
 	get_node("PlayerSprite").rotation = velocity.angle() + deg2rad(90)
 	#rotation += rot_dir * rot_speed * delta
 	move_and_slide(velocity)
+	
+func shoot():
+	print("pew pew")
+	
+	var bullet = bullet_scene.instance()
+	bullet.fire(self.global_position, velocity.angle())
+	get_parent().add_child(bullet)
+
+	
+	
+	
+	
+	
+	#bullet.queue_free()
+	#remove_child(bullet)
+	
+
 
