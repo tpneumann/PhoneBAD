@@ -3,7 +3,7 @@ extends KinematicBody2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var speed = 300 
+var speed = 500
 
 var velocity = Vector2()
 
@@ -19,7 +19,3 @@ func _physics_process(delta):
 		velocity = velocity.bounce(collision.normal)
 	
 	
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
