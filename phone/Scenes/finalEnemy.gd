@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends StaticBody2D
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -35,13 +35,15 @@ func _physics_process(delta):
 		
 		if (followPlayer):
 			var playerAngle = get_angle_to(player.get_position()) + deg2rad(90)
-			get_node("EnMovingSprite").rotation = playerAngle
+			get_node("EnFinalSprite").rotation = playerAngle
 			
 			dir = dist.normalized()
-			move_and_slide(dir * speed)
+		
 			
 			if (canShoot):
 				shoot()
+				
+			
 			
 func shoot():
 	#print("pew pew" + String(rng.randf_range(1, 100)))

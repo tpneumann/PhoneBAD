@@ -71,9 +71,9 @@ func shoot():
 	var bullet = bullet_scene.instance()
 	#bullet.fire(self.global_position + velocity * 30, velocity.angle())
 	if (moving):
-		bullet.fire(self.global_position + dir * 30, dir.angle())
+		bullet.fire(self.position + dir * 30, dir.angle())
 	else:
-		bullet.fire(self.global_position + Vector2(0,30), deg2rad(270))
+		bullet.fire(self.position + Vector2(0,30), deg2rad(270))
 	get_parent().add_child(bullet)
 
 

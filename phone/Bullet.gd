@@ -21,7 +21,7 @@ func _ready():
 
 func fire(pos, dir):
 	rotation = dir
-	position = pos
+	global_position = pos
 	velocity = Vector2(speed, 0).rotated(rotation)
 
 func _physics_process(delta):
