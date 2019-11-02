@@ -71,10 +71,11 @@ func _physics_process(delta):
 		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite3.png")
 	elif(health == 2):
 		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite2.png")
-	elif(health = 1):
+	elif(health == 1):
 		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite1.png")
-	else(health == 0):
-		
+	elif(health == 0):
+		#death script 
+		pass
 	
 func shoot():
 	#print("pew pew" + String(rng.randf_range(1, 100)))
