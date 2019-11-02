@@ -7,11 +7,10 @@ extends KinematicBody2D
 export (int) var speed = 200
 onready var bullet_scene = preload("res://Bullet.tscn")
 
-"""
+
 var velocity = Vector2()
 var rot_dir = 0
 export (float) var rot_speed = 1.5
-"""
 
 # Called when the node enters the scene tree for the first time.
 #func _ready():
