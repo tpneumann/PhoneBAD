@@ -11,6 +11,7 @@ var speed = 50
 var aggroRange = 600
 var velocity = Vector2()
 var dir
+var health = 1
 
 onready var bullet_scene = preload("res://EnemyBullet.tscn")
 var bulletTimer
@@ -55,3 +56,15 @@ func shoot():
 	
 func _on_bulletTimer_timeout():
 	canShoot = true
+
+func takeShot():
+	health -= 1
+	if health <= 0:
+		self.queue_free()
+		get_parent().remove_child(self)
+
+
+
+
+
+

@@ -4,9 +4,12 @@ extends KinematicBody2D
 
 export (int) var speed = 200
 onready var bullet_scene = preload("res://Bullet.tscn")
+onready var sceneRestart = preload("res://Prefabs/SceneRestarter.tscn")
 var canShoot = true
 var bulletTimer
 var shotSpeed = .1
+
+var health = 2
 
 var moving = false
 
@@ -49,7 +52,6 @@ func get_input():
 	
 	if Input.is_action_pressed('ui_accept') && canShoot:
 		shoot()
-	
 
 func _physics_process(delta):
 	
@@ -61,7 +63,7 @@ func _physics_process(delta):
 	else: 
 		get_node("PlayerSprite").rotation = deg2rad(0)
 	move_and_slide(dir * speed)
-	
+
 func shoot():
 	#print("pew pew" + String(rng.randf_range(1, 100)))
 	
@@ -73,9 +75,25 @@ func shoot():
 	if (moving):
 		bullet.fire(self.global_position + dir * 30, dir.angle())
 	else:
-		bullet.fire(self.global_position + Vector2(0,30), deg2rad(270))
+		bullet.fire(self.global_position + Vector2(0,-30), deg2rad(270))
 	get_parent().add_child(bullet)
-
 
 func _on_bulletTimer_timeout():
 	canShoot = true
+
+func takeShot():
+	health -= 1
+	get_tree().call_group("enemybullet", "beDeleted")
+	
+	if health <= 0:
+		var redo = sceneRestart.instance()
+		get_parent().add_child(redo)
+		
+		self.queue_free()
+		get_parent().remove_child(self)
+
+
+
+
+
+

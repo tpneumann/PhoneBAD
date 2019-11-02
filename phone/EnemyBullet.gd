@@ -30,7 +30,7 @@ func _physics_process(delta):
 			
 			var other = collision.collider
 			if other.is_in_group("player"):
-				other.queue_free()
+				other.takeShot()
 			elif !other.is_in_group("enemy"):
 				self.queue_free()
 				get_parent().remove_child(self)
@@ -39,4 +39,8 @@ func _physics_process(delta):
 
 func _on_activeTimer_timeout(): 
 	get_node("BulletCollide").disabled = false
-	
+
+func beDeleted():
+	self.queue_free()
+	#get_parent().remove_child(self)
+

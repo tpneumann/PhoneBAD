@@ -32,12 +32,12 @@ func _physics_process(delta):
 			
 			var other = collision.collider
 			if other.is_in_group("enemy"):
-				other.queue_free()
+				other.takeShot()
 			elif other.is_in_group("enemybullet"):
 				other.queue_free()
 			
 			self.queue_free()
-			get_parent().remove_child(self)
+			#get_parent().remove_child(self)
 		else:
 			velocity = velocity.bounce(collision.normal)
 	

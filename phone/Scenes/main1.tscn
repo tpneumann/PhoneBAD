@@ -1,16 +1,17 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/player.png" type="Texture" id=2]
 [ext_resource path="res://icon.png" type="Texture" id=3]
 [ext_resource path="res://Prefabs/MovingEnemy.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Prefabs/TurretEnemy.tscn" type="PackedScene" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
+[sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
-[sub_resource type="TileSet" id=4]
+[sub_resource type="TileSet" id=3]
 0/name = "icon.png 0"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
@@ -23,7 +24,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": SubResource( 3 ),
+"shape": SubResource( 2 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 0/z_index = 0
@@ -33,6 +34,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 [node name="Player" type="KinematicBody2D" parent="." groups=[
 "player",
 ]]
+editor/display_folded = true
 position = Vector2( 36, 500 )
 scale = Vector2( 4, 4 )
 script = ExtResource( 1 )
@@ -52,12 +54,12 @@ scale = Vector2( 0.25, 0.25 )
 [node name="TileMap" type="TileMap" parent="." groups=[
 "wall",
 ]]
-tile_set = SubResource( 4 )
+tile_set = SubResource( 3 )
 format = 1
 tile_data = PoolIntArray( 12, 0, 0, 65548, 0, 0, 131075, 0, 0, 131084, 0, 0, 196611, 0, 0, 196613, 0, 0, 196620, 0, 0, 262147, 0, 0, 262149, 0, 0, 327683, 0, 0 )
 
 [node name="MovingEnemy" parent="." instance=ExtResource( 4 )]
 position = Vector2( 957.895, 490.526 )
 
-[node name="MovingEnemy2" parent="." instance=ExtResource( 4 )]
-position = Vector2( 896.842, 490.526 )
+[node name="TurretEnemy" parent="." instance=ExtResource( 5 )]
+position = Vector2( 572.632, 170.526 )
