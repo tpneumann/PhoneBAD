@@ -3,21 +3,21 @@ extends KinematicBody2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var SPEED = 100 
+var speed = 500 
 
-var shoot_dir = Vector2()
+var velocity = Vector2()
 
-func fire(postion, direction):
-	shoot_dir = direction
-	self.position = position
-	
-	print("Bullet.gd ran")
-	
-	
-	
+func fire(pos, dir):
+	rotation = dir
+	position = pos
+	velocity = Vector2(speed, 0).rotated(rotation)
 
 func _physics_process(delta):
-	move_and_slide(shoot_dir)
+	
+	var collision = move_and_collide(velocity * delta)
+	if collision:
+		velocity = velocity.bounce(collision.normal)
+	
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
