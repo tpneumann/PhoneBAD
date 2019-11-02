@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Bullet.tscn" type="PackedScene" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -24,3 +25,6 @@ texture = ExtResource( 2 )
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2( 3, -50 )
 scale = Vector2( 0.25, 0.25 )
+
+[node name="Bullet" parent="." instance=ExtResource( 3 )]
+visible = false
