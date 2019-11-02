@@ -5,6 +5,13 @@ extends KinematicBody2D
 export (int) var speed = 200
 onready var bullet_scene = preload("res://Bullet.tscn")
 onready var sceneRestart = preload("res://Prefabs/SceneRestarter.tscn")
+
+onready var health5 = preload("res://Sprites/playerSprite5.png")
+onready var health4 = preload("res://Sprites/playerSprite4.png")
+onready var health3 = preload("res://Sprites/playerSprite3.png")
+onready var health2 = preload("res://Sprites/playerSprite2.png")
+onready var health1 = preload("res://Sprites/playerSprite1.png")
+
 var canShoot = true
 var bulletTimer
 var shotSpeed = .1
@@ -64,19 +71,6 @@ func _physics_process(delta):
 		get_node("PlayerSprite").rotation = deg2rad(0)
 	move_and_slide(dir * speed)
 	
-	#update sprite for heatlh 
-	
-	if(health == 4):
-		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite4.png")
-	elif(health == 3):
-		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite3.png")
-	elif(health == 2):
-		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite2.png")
-	elif(health == 1):
-		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite1.png")
-	elif(health == 0):
-		#death script 
-		pass
 	
 func shoot():
 	#print("pew pew" + String(rng.randf_range(1, 100)))
@@ -99,14 +93,26 @@ func takeShot():
 	health -= 1
 	get_tree().call_group("enemybullet", "beDeleted")
 	
-	if health <= 0:
+	if(health > 0):
+		setPlayerSprite()
+	else:
 		var redo = sceneRestart.instance()
 		get_parent().add_child(redo)
 		
 		self.queue_free()
 		get_parent().remove_child(self)
 
-
+func setPlayerSprite():
+	if(health >= 5):
+		get_node("PlayerSprite").set_texture(health5)
+	elif(health == 4):
+		get_node("PlayerSprite").set_texture(health4)
+	elif(health == 3):
+		get_node("PlayerSprite").set_texture(health3)
+	elif(health == 2):
+		get_node("PlayerSprite").set_texture(health2)
+	elif(health == 1):
+		get_node("PlayerSprite").set_texture(health1)
 
 
 
