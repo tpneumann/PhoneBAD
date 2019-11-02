@@ -62,6 +62,20 @@ func _physics_process(delta):
 		get_node("PlayerSprite").rotation = deg2rad(0)
 	move_and_slide(dir * speed)
 	
+	#update sprite for heatlh 
+	var health = 5
+	
+	if(health == 4):
+		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite4.png")
+	elif(health == 3):
+		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite3.png")
+	elif(health == 2):
+		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite2.png")
+	elif(health = 1):
+		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite1.png")
+	else(health == 0):
+		
+	
 func shoot():
 	#print("pew pew" + String(rng.randf_range(1, 100)))
 	
