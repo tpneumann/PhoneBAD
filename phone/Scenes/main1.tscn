@@ -6,7 +6,6 @@
 [ext_resource path="res://Prefabs/MovingEnemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Prefabs/TurretEnemy.tscn" type="PackedScene" id=5]
 
-
 [sub_resource type="RectangleShape2D" id=1]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
