@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends StaticBody2D
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -11,7 +11,6 @@ var speed = 50
 var aggroRange = 600
 var velocity = Vector2()
 var dir
-var health = 1
 
 onready var bullet_scene = preload("res://EnemyBullet.tscn")
 var bulletTimer
@@ -36,13 +35,15 @@ func _physics_process(delta):
 		
 		if (followPlayer):
 			var playerAngle = get_angle_to(player.get_position()) + deg2rad(90)
-			get_node("EnMovingSprite").rotation = playerAngle
+			get_node("EnFinalSprite").rotation = playerAngle
 			
 			dir = dist.normalized()
-			move_and_slide(dir * speed)
+		
 			
 			if (canShoot):
 				shoot()
+				
+			
 			
 func shoot():
 	#print("pew pew" + String(rng.randf_range(1, 100)))
@@ -56,15 +57,3 @@ func shoot():
 	
 func _on_bulletTimer_timeout():
 	canShoot = true
-
-func takeShot():
-	health -= 1
-	if health <= 0:
-		self.queue_free()
-		get_parent().remove_child(self)
-
-
-
-
-
-

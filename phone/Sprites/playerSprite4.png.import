@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/wallCrossSprite.png-a727468d001a0bec2497efc6e04fbed6.stex"
+path="res://.import/playerSprite4.png-7a386665e361930b3d7fd74be943d7dc.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://wallCrossSprite.png"
-dest_files=[ "res://.import/wallCrossSprite.png-a727468d001a0bec2497efc6e04fbed6.stex" ]
+source_file="res://Sprites/playerSprite4.png"
+dest_files=[ "res://.import/playerSprite4.png-7a386665e361930b3d7fd74be943d7dc.stex" ]
 
 [params]
 

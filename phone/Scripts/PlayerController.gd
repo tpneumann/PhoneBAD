@@ -9,7 +9,7 @@ var canShoot = true
 var bulletTimer
 var shotSpeed = .1
 
-var health = 2
+var health = 5
 
 var moving = false
 
@@ -63,7 +63,21 @@ func _physics_process(delta):
 	else: 
 		get_node("PlayerSprite").rotation = deg2rad(0)
 	move_and_slide(dir * speed)
-
+	
+	#update sprite for heatlh 
+	
+	if(health == 4):
+		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite4.png")
+	elif(health == 3):
+		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite3.png")
+	elif(health == 2):
+		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite2.png")
+	elif(health == 1):
+		get_node("PlayerSprite").set_texture("res://Sprites/playerSprite1.png")
+	elif(health == 0):
+		#death script 
+		pass
+	
 func shoot():
 	#print("pew pew" + String(rng.randf_range(1, 100)))
 	
@@ -73,7 +87,7 @@ func shoot():
 	var bullet = bullet_scene.instance()
 	#bullet.fire(self.global_position + velocity * 30, velocity.angle())
 	if (moving):
-		bullet.fire(self.global_position + dir * 30, dir.angle())
+		bullet.fire(self.position + dir * 30, dir.angle())
 	else:
 		bullet.fire(self.global_position + Vector2(0,-30), deg2rad(270))
 	get_parent().add_child(bullet)
