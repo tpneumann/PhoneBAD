@@ -62,7 +62,7 @@ func shoot():
 	
 	var bullet = bullet_scene.instance()
 	#bullet.fire(self.global_position + velocity * 30, velocity.angle())
-	bullet.fire(self.global_position + dir * 75, dir.angle())
+	bullet.fire(self.global_position + dir * 30, dir.angle())
 	get_parent().add_child(bullet)
 
 

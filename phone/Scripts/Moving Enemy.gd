@@ -50,7 +50,7 @@ func shoot():
 	bulletTimer.start(shotSpeed)
 	
 	var bullet = bullet_scene.instance()
-	bullet.fire(self.global_position + dir * 30, dir.angle())
+	bullet.fire(self.global_position + dir * 40, dir.angle())
 	get_parent().add_child(bullet)
 	
 func _on_bulletTimer_timeout():
