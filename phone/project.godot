@@ -16,11 +16,14 @@ _global_script_class_icons={
 [application]
 
 config/name="phone"
-run/main_scene="res://Scenes/main2.tscn"
+run/main_scene="res://Scenes/main1.tscn"
 config/icon="res://icon.png"
 
 [display]
 
+window/size/width=800
+window/size/height=1024
+window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 

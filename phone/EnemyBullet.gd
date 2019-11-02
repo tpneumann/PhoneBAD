@@ -13,7 +13,7 @@ func _ready():
 	activeTimer = Timer.new()
 	activeTimer.connect("timeout",self,"_on_activeTimer_timeout") 
 	add_child(activeTimer)
-	get_node("BulletCollide").disabled = true
+	get_node("BulletCollide").disabled = false
 	activeTimer.one_shot = true
 	activeTimer.start(timerCountdown)
 
@@ -38,7 +38,8 @@ func _physics_process(delta):
 			velocity = velocity.bounce(collision.normal)
 
 func _on_activeTimer_timeout(): 
-	get_node("BulletCollide").disabled = false
+	#get_node("BulletCollide").disabled = false
+	pass
 
 func beDeleted():
 	self.queue_free()

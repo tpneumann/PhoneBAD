@@ -4,7 +4,7 @@
 [ext_resource path="res://Sprites/enemySprite.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 18.8948, 16.6316 )
+extents = Vector2( 18.8948, 27.8594 )
 
 [node name="MovingEnemy" type="KinematicBody2D" groups=[
 "enemy",
@@ -18,5 +18,5 @@ scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0, 13 )
+position = Vector2( 0, 8.12325 )
 shape = SubResource( 1 )

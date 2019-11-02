@@ -12,9 +12,16 @@ onready var health3 = preload("res://Sprites/playerSprite3.png")
 onready var health2 = preload("res://Sprites/playerSprite2.png")
 onready var health1 = preload("res://Sprites/playerSprite1.png")
 
+onready var alarmScreen1 = preload("res://Sprites/__placeholderPhoneScreen.png")
+onready var alarmScreen2 = preload("res://Sprites/__placeholderPhoneScreen2.png")
+
+
 var canShoot = true
 var bulletTimer
 var shotSpeed = .1
+
+var winTime
+var winDelay = 5
 
 var health = 5
 
@@ -31,6 +38,10 @@ func _ready():
 	bulletTimer = Timer.new()
 	bulletTimer.connect("timeout",self,"_on_bulletTimer_timeout") 
 	add_child(bulletTimer)
+	
+	winTime = Timer.new()
+	winTime.connect("timeout",self,"doBigWin")
+	add_child(winTime)
 	
 	rng.randomize()
 
@@ -79,11 +90,10 @@ func shoot():
 	bulletTimer.start(shotSpeed)
 	
 	var bullet = bullet_scene.instance()
-	#bullet.fire(self.global_position + velocity * 30, velocity.angle())
 	if (moving):
 		bullet.fire(self.position + dir * 30, dir.angle())
 	else:
-		bullet.fire(self.global_position + Vector2(0,-30), deg2rad(270))
+		bullet.fire(self.position + Vector2(0,-30), deg2rad(270))
 	get_parent().add_child(bullet)
 
 func _on_bulletTimer_timeout():
@@ -99,6 +109,12 @@ func takeShot():
 		var redo = sceneRestart.instance()
 		get_parent().add_child(redo)
 		
+		
+		var sceneCamera = get_node("PlayerCamera")
+		sceneCamera.current = false
+		self.remove_child(sceneCamera)
+		get_parent().add_child(sceneCamera)
+		
 		self.queue_free()
 		get_parent().remove_child(self)
 
@@ -113,6 +129,17 @@ func setPlayerSprite():
 		get_node("PlayerSprite").set_texture(health2)
 	elif(health == 1):
 		get_node("PlayerSprite").set_texture(health1)
+
+func winTimer():
+	get_tree().call_group("enemybullet", "beDeleted")
+	get_tree().call_group("enemy", "takeShot")
+	
+	winTime.start(winDelay)
+
+func doBigWin():
+	pass
+
+
 
 
 

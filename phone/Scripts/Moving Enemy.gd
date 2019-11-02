@@ -35,10 +35,10 @@ func _physics_process(delta):
 			followPlayer = true
 		
 		if (followPlayer):
-			var playerAngle = get_angle_to(player.get_position()) + deg2rad(90)
-			get_node("EnMovingSprite").rotation = playerAngle
-			
+			#var playerAngle = get_angle_to(player.get_position()) + deg2rad(90)
 			dir = dist.normalized()
+			get_node("EnMovingSprite").rotation = dir.angle() + deg2rad(90)
+			
 			move_and_slide(dir * speed)
 			
 			if (canShoot):
