@@ -1,14 +1,20 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/playerSprite5.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/PlayerCamera.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/playerDeath1.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/playerDeat2.png" type="Texture" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/phoneScreen1.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/phoneScreen2.png" type="Texture" id=8]
-[ext_resource path="res://Prefabs/TurretEnemy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Sounds/shot.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sounds/deathSound.wav" type="AudioStream" id=7]
+[ext_resource path="res://Sounds/playerHit.wav" type="AudioStream" id=8]
+[ext_resource path="res://icon.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/phoneScreen1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/phoneScreen2.png" type="Texture" id=11]
+[ext_resource path="res://Prefabs/TurretEnemy.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Sounds/alarmClock.wav" type="AudioStream" id=13]
+[ext_resource path="res://Sounds/main.wav" type="AudioStream" id=14]
+[ext_resource path="res://Sounds/enemyHit.wav" type="AudioStream" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -25,7 +31,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [sub_resource type="TileSet" id=4]
 0/name = "icon.png 0"
-0/texture = ExtResource( 6 )
+0/texture = ExtResource( 9 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 64, 64 )
@@ -46,6 +52,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 [node name="Player" type="KinematicBody2D" parent="." groups=[
 "player",
 ]]
+editor/display_folded = true
 position = Vector2( 350, 400 )
 scale = Vector2( 4, 4 )
 collision_layer = 2
@@ -71,6 +78,17 @@ visible = false
 scale = Vector2( 0.15, 0.15 )
 frames = SubResource( 2 )
 
+[node name="shotSound" type="AudioStreamPlayer2D" parent="Player"]
+position = Vector2( -87.5, -100 )
+scale = Vector2( 0.25, 0.25 )
+stream = ExtResource( 6 )
+
+[node name="deathSound" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 7 )
+
+[node name="playerHit" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 8 )
+
 [node name="TileMap" type="TileMap" parent="." groups=[
 "wall",
 ]]
@@ -79,6 +97,7 @@ format = 1
 tile_data = PoolIntArray( -196608, 0, 0, -196607, 0, 0, -196606, 0, 0, -196605, 0, 0, -196604, 0, 0, -196603, 0, 0, -196602, 0, 0, -196601, 0, 0, -196600, 0, 0, -196599, 0, 0, -196598, 0, 0, -131072, 0, 0, -131062, 0, 0, -65536, 0, 0, -65526, 0, 0, 0, 0, 0, 10, 0, 0, 65536, 0, 0, 65546, 0, 0, 131072, 0, 0, 131082, 0, 0, 196608, 0, 0, 196618, 0, 0, 262144, 0, 0, 262154, 0, 0, 327680, 0, 0, 327690, 0, 0, 393216, 0, 0, 393226, 0, 0, 458752, 0, 0, 458762, 0, 0, 524288, 0, 0, 524298, 0, 0, 589824, 0, 0, 589834, 0, 0, 655360, 0, 0, 655370, 0, 0, 720896, 0, 0, 720906, 0, 0, 786432, 0, 0, 786442, 0, 0, 851968, 0, 0, 851969, 0, 0, 851970, 0, 0, 851971, 0, 0, 851972, 0, 0, 851973, 0, 0, 851974, 0, 0, 851975, 0, 0, 851976, 0, 0, 851977, 0, 0, 851978, 0, 0 )
 
 [node name="GUI" type="Control" parent="."]
+editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -86,13 +105,23 @@ margin_bottom = 40.0
 visible = false
 margin_right = 800.0
 margin_bottom = 1024.0
-texture = ExtResource( 7 )
+texture = ExtResource( 10 )
 
 [node name="PhoneScreen2" type="TextureRect" parent="GUI"]
 visible = false
 margin_right = 761.048
 margin_bottom = 714.218
-texture = ExtResource( 8 )
+texture = ExtResource( 11 )
 
-[node name="TurretEnemy" parent="." instance=ExtResource( 9 )]
+[node name="TurretEnemy" parent="." instance=ExtResource( 12 )]
 position = Vector2( 564.198, 71.5987 )
+
+[node name="alarmSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+
+[node name="mainSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 14 )
+volume_db = 2.0
+
+[node name="enemyHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )

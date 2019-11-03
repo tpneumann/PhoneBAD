@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/alarmClock.wav-648babbb2ad42ce3fa40cfb39a2bfa00.sample"
+
+[deps]
+
+source_file="res://Sounds/alarmClock.wav"
+dest_files=[ "res://.import/alarmClock.wav-648babbb2ad42ce3fa40cfb39a2bfa00.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0

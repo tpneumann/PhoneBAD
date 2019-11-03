@@ -65,6 +65,8 @@ func _ready():
 	fone2 = get_parent().get_node("GUI").get_node("PhoneScreen2")
 	
 	rng.randomize()
+	
+	get_parent().get_node("mainSound").play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
@@ -116,6 +118,8 @@ func shoot():
 		bullet.fire(self.position + Vector2(0,-30), deg2rad(270))
 	get_parent().add_child(bullet)
 	bullet.player = self
+	
+	get_node("shotSound").play()
 
 func _on_bulletTimer_timeout():
 	canShoot = true
@@ -131,6 +135,7 @@ func takeShot():
 		
 		if(health > 0):
 			setPlayerSprite()
+			get_node("playerHit").play()
 		elif (isAlive):
 			var sceneCamera = get_node("PlayerCamera")
 			sceneCamera.current = false
@@ -171,13 +176,16 @@ func beHit():
 
 func BOO():
 	fone1.visible = false
+	get_parent().get_node("alarmSound").play()
 	fone2.visible = true
 
 func playerDeath():
 	
 	get_node("PlayerSprite").visible = false
 	get_node("PlayerSpriteDeath").visible = true
+	get_parent().get_node("mainSound").stop()
 	get_node("PlayerSpriteDeath").play("default", false)
+	get_node("deathSound").play()
 	
 	isAlive = false
 	var redo = sceneRestart.instance()
