@@ -13,7 +13,7 @@
 [ext_resource path="res://Sprites/wallCrossSprite.png" type="Texture" id=11]
 [ext_resource path="res://Prefabs/FinalNode.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Sounds/alarmClock.wav" type="AudioStream" id=13]
-[ext_resource path="res://Sounds/main.wav" type="AudioStream" id=14]
+[ext_resource path="res://Sounds/mainSound.wav" type="AudioStream" id=14]
 [ext_resource path="res://Sounds/enemyHit.wav" type="AudioStream" id=15]
 [ext_resource path="res://Sprites/phoneScreen1.png" type="Texture" id=16]
 [ext_resource path="res://Sprites/phoneScreen2.png" type="Texture" id=17]
@@ -95,6 +95,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 [node name="Player" type="KinematicBody2D" parent="." groups=[
 "player",
 ]]
+editor/display_folded = true
 position = Vector2( 371.985, 496.985 )
 scale = Vector2( 4, 4 )
 collision_layer = 2
@@ -146,13 +147,16 @@ position = Vector2( 617.64, -2852.21 )
 
 [node name="alarmSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 13 )
+max_distance = 4000.0
 
 [node name="mainSound" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( 1, 0 )
 stream = ExtResource( 14 )
+max_distance = 4000.0
 
 [node name="enemyHit" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 15 )
+max_distance = 4000.0
 
 [node name="GUI" type="Control" parent="."]
 margin_right = 40.0

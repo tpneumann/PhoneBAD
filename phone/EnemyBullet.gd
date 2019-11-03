@@ -6,7 +6,6 @@ extends KinematicBody2D
 var speed = 500
 
 var velocity = Vector2()
-var activeTimer
 var timerCountdown = .1
 
 func fire(pos, dir):
