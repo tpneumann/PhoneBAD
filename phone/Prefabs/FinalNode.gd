@@ -58,7 +58,9 @@ func _on_bulletTimer_timeout():
 
 func takeShot():
 	health -= 1
+
 	if health <= 0:
+		get_parent().get_node("bossDeathSound").play()
 		self.queue_free()
 		get_parent().remove_child(self)
 

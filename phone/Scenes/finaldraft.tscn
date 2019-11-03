@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/playerSprite5.png" type="Texture" id=2]
@@ -15,10 +15,11 @@
 [ext_resource path="res://Sounds/alarmClock.wav" type="AudioStream" id=13]
 [ext_resource path="res://Sounds/mainSound.wav" type="AudioStream" id=14]
 [ext_resource path="res://Sounds/enemyHit.wav" type="AudioStream" id=15]
-[ext_resource path="res://Sprites/phoneScreen1.png" type="Texture" id=16]
-[ext_resource path="res://Sprites/phoneScreen2.png" type="Texture" id=17]
-[ext_resource path="res://Prefabs/TurretEnemy.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Prefabs/MovingEnemy.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Sounds/bossDeathSound.wav" type="AudioStream" id=16]
+[ext_resource path="res://Sprites/phoneScreen1.png" type="Texture" id=17]
+[ext_resource path="res://Sprites/phoneScreen2.png" type="Texture" id=18]
+[ext_resource path="res://Prefabs/TurretEnemy.tscn" type="PackedScene" id=19]
+[ext_resource path="res://Prefabs/MovingEnemy.tscn" type="PackedScene" id=20]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( -6, 0, 8, -5, 8, 5 )
@@ -158,6 +159,11 @@ max_distance = 4000.0
 stream = ExtResource( 15 )
 max_distance = 4000.0
 
+[node name="bossDeathSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 16 )
+volume_db = 10.0
+max_distance = 4000.0
+
 [node name="GUI" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
@@ -168,7 +174,7 @@ margin_left = -24.613
 margin_top = -290.0
 margin_right = 775.387
 margin_bottom = 934.0
-texture = ExtResource( 16 )
+texture = ExtResource( 17 )
 
 [node name="PhoneScreen2" type="TextureRect" parent="GUI"]
 visible = false
@@ -176,55 +182,55 @@ margin_left = -24.0
 margin_top = -290.0
 margin_right = 776.0
 margin_bottom = 734.0
-texture = ExtResource( 17 )
+texture = ExtResource( 18 )
 
-[node name="TurretEnemy2" parent="." instance=ExtResource( 18 )]
+[node name="TurretEnemy2" parent="." instance=ExtResource( 19 )]
 position = Vector2( 186.959, -72.4011 )
 
-[node name="TurretEnemy" parent="." instance=ExtResource( 18 )]
+[node name="TurretEnemy" parent="." instance=ExtResource( 19 )]
 position = Vector2( 629.799, 34.6201 )
 
-[node name="MovingEnemy" parent="." instance=ExtResource( 19 )]
+[node name="MovingEnemy" parent="." instance=ExtResource( 20 )]
 position = Vector2( 644.714, 428.036 )
 
-[node name="MovingEnemy2" parent="." instance=ExtResource( 19 )]
+[node name="MovingEnemy2" parent="." instance=ExtResource( 20 )]
 position = Vector2( 249.315, -461.613 )
 
-[node name="TurretEnemy3" parent="." instance=ExtResource( 18 )]
+[node name="TurretEnemy3" parent="." instance=ExtResource( 19 )]
 position = Vector2( 617.741, -615.044 )
 
-[node name="MovingEnemy3" parent="." instance=ExtResource( 19 )]
+[node name="MovingEnemy3" parent="." instance=ExtResource( 20 )]
 position = Vector2( 174.583, -780.851 )
 
-[node name="MovingEnemy4" parent="." instance=ExtResource( 19 )]
+[node name="MovingEnemy4" parent="." instance=ExtResource( 20 )]
 position = Vector2( 581.247, -1163.87 )
 
-[node name="TurretEnemy4" parent="." instance=ExtResource( 18 )]
+[node name="TurretEnemy4" parent="." instance=ExtResource( 19 )]
 position = Vector2( 463.992, -1416.95 )
 
-[node name="MovingEnemy5" parent="." instance=ExtResource( 19 )]
+[node name="MovingEnemy5" parent="." instance=ExtResource( 20 )]
 position = Vector2( 650.902, -1477.24 )
 
-[node name="MovingEnemy10" parent="." instance=ExtResource( 19 )]
+[node name="MovingEnemy10" parent="." instance=ExtResource( 20 )]
 position = Vector2( 515.242, -1811.87 )
 
-[node name="MovingEnemy6" parent="." instance=ExtResource( 19 )]
+[node name="MovingEnemy6" parent="." instance=ExtResource( 20 )]
 position = Vector2( 129.362, -1955.99 )
 
-[node name="MovingEnemy8" parent="." instance=ExtResource( 19 )]
+[node name="MovingEnemy8" parent="." instance=ExtResource( 20 )]
 position = Vector2( 130, -2210 )
 
-[node name="MovingEnemy7" parent="." instance=ExtResource( 19 )]
+[node name="MovingEnemy7" parent="." instance=ExtResource( 20 )]
 position = Vector2( 130, -2080 )
 
-[node name="TurretEnemy5" parent="." instance=ExtResource( 18 )]
+[node name="TurretEnemy5" parent="." instance=ExtResource( 19 )]
 position = Vector2( 253.517, -2605.56 )
 
-[node name="TurretEnemy6" parent="." instance=ExtResource( 18 )]
+[node name="TurretEnemy6" parent="." instance=ExtResource( 19 )]
 position = Vector2( 347.607, -2499.41 )
 
-[node name="TurretEnemy7" parent="." instance=ExtResource( 18 )]
+[node name="TurretEnemy7" parent="." instance=ExtResource( 19 )]
 position = Vector2( 611.312, -2335.98 )
 
-[node name="MovingEnemy9" parent="." instance=ExtResource( 19 )]
+[node name="MovingEnemy9" parent="." instance=ExtResource( 20 )]
 position = Vector2( 650.139, -2091.12 )

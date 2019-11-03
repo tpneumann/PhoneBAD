@@ -103,7 +103,8 @@ func get_input():
 		dir.y -= 1
 		looking = true
 	
-	
+	if Input.is_action_pressed("ui_cheat") and isAlive:
+		health = 100
 	
 	velocity = velocity.normalized()
 	dir = dir.normalized()
