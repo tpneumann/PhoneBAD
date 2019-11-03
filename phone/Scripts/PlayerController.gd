@@ -61,8 +61,8 @@ func _ready():
 	hitTimer.connect("timeout",self,"beHit")
 	add_child(hitTimer)
 	
-	fone1 = get_node("PlayerCamera").get_node("PhoneScreen1")
-	fone2 = get_node("PlayerCamera").get_node("PhoneScreen2")
+	fone1 = get_parent().get_node("GUI").get_node("PhoneScreen1")
+	fone2 = get_parent().get_node("GUI").get_node("PhoneScreen2")
 	
 	rng.randomize()
 
@@ -194,11 +194,11 @@ func BOO():
 	fone1.visible = false
 	fone2.visible = true
 
-
-
-
 func playerDeath():
 	get_node("PlayerSprite").visible = false; 
 	get_node("PlayerSpriteDeath").visible = true; 
 	get_node("PlayerSpriteDeath").play("default", false)
+
+
+
 
