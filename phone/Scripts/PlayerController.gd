@@ -17,6 +17,8 @@ onready var health1 = preload("res://Sprites/playerSprite1.png")
 
 var fone1
 var fone2
+onready var death1 = preload("res://Sprites/playerDeath1.png")
+onready var death2 = preload("res://Sprites/playerDeat2.png")
 
 var canShoot = true
 var bulletTimer
@@ -142,6 +144,24 @@ func takeShot():
 			
 			self.queue_free()
 			get_parent().remove_child(self)
+	if(health > 0):
+		setPlayerSprite()
+	else:
+		self.playerDeath()
+		
+		##REMOVE ONCE CAMERA FIXED
+		var t = Timer.new()
+		t.set_wait_time(3)
+		t.set_one_shot(true)
+		self.add_child(t)
+		t.start()
+		yield(t, "timeout")
+		##REMOVE ONCE CAMERA FIXED
+
+		var redo = sceneRestart.instance()
+		get_parent().add_child(redo)
+		self.queue_free()
+		get_parent().remove_child(self)
 
 func setPlayerSprite():
 	if(health >= 5):
@@ -154,6 +174,7 @@ func setPlayerSprite():
 		get_node("PlayerSprite").set_texture(health2)
 	elif(health == 1):
 		get_node("PlayerSprite").set_texture(health1)
+		
 
 func winTimer():
 	get_tree().call_group("enemybullet", "beDeleted")
@@ -176,5 +197,8 @@ func BOO():
 
 
 
-
+func playerDeath():
+	get_node("PlayerSprite").visible = false; 
+	get_node("PlayerSpriteDeath").visible = true; 
+	get_node("PlayerSpriteDeath").play("default", false)
 

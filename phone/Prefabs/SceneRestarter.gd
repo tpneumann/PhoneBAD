@@ -11,6 +11,7 @@ func _ready():
 	sceneTimer.connect("timeout", self, "restartScene")
 	add_child(sceneTimer)
 	sceneTimer.start(restartTime)
+	
 
 
 
