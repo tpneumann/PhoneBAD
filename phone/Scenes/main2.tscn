@@ -9,8 +9,8 @@
 [ext_resource path="res://Sprites/wallSprite.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/wallCrossSprite.png" type="Texture" id=8]
 [ext_resource path="res://Prefabs/FinalNode.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Sprites/__placeholderPhoneScreen.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/__placeholderPhoneScreen2.png" type="Texture" id=11]
+[ext_resource path="res://Sprites/phoneScreen1.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/phoneScreen2.png" type="Texture" id=11]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( -6, 0, 8, -5, 8, 5 )
