@@ -181,9 +181,11 @@ func winTimer():
 	get_tree().call_group("enemy", "takeShot")
 	
 	winTime.start(winDelay)
+	winTime.one_shot = true
 
 func doBigWin():
 	print("did big win?")
+	get_node("PlayerCamera").endgame = true
 	fone1.visible = true
 	booTime.start(booDelay)
 
