@@ -10,6 +10,8 @@ var velocity = Vector2()
 var activeTimer
 var timerCountdown = .1
 
+var player
+
 func _ready():
 	activeTimer = Timer.new()
 	activeTimer.connect("timeout",self,"_on_activeTimer_timeout") 
@@ -33,6 +35,9 @@ func _physics_process(delta):
 			var other = collision.collider
 			if other.is_in_group("enemy"):
 				other.takeShot()
+				if (other.health <= 0 and other.is_in_group("final")):
+					print("health be go?")
+					player.winTimer()
 			elif other.is_in_group("enemybullet"):
 				other.queue_free()
 			

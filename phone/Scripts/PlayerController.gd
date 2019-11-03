@@ -12,9 +12,11 @@ onready var health3 = preload("res://Sprites/playerSprite3.png")
 onready var health2 = preload("res://Sprites/playerSprite2.png")
 onready var health1 = preload("res://Sprites/playerSprite1.png")
 
-onready var alarmScreen1 = preload("res://Sprites/__placeholderPhoneScreen.png")
-onready var alarmScreen2 = preload("res://Sprites/__placeholderPhoneScreen2.png")
+#onready var alarmScreen1 = preload("res://Sprites/__placeholderPhoneScreen.png")
+#onready var alarmScreen2 = preload("res://Sprites/__placeholderPhoneScreen2.png")
 
+var fone1
+var fone2
 
 var canShoot = true
 var bulletTimer
@@ -22,10 +24,16 @@ var shotSpeed = .1
 
 var winTime
 var winDelay = 5
+var booTime
+var booDelay = 1.5
 
 var health = 5
 
 var moving = false
+
+var hittable = true
+var hitTimer
+var hitDelay = .05
 
 var rng = RandomNumberGenerator.new()
 
@@ -42,6 +50,17 @@ func _ready():
 	winTime = Timer.new()
 	winTime.connect("timeout",self,"doBigWin")
 	add_child(winTime)
+	
+	booTime = Timer.new()
+	booTime.connect("timeout",self,"BOO")
+	add_child(booTime)
+	
+	hitTimer = Timer.new()
+	hitTimer.connect("timeout",self,"beHit")
+	add_child(hitTimer)
+	
+	fone1 = get_node("PlayerCamera").get_node("PhoneScreen1")
+	fone2 = get_node("PlayerCamera").get_node("PhoneScreen2")
 	
 	rng.randomize()
 
@@ -95,28 +114,34 @@ func shoot():
 	else:
 		bullet.fire(self.position + Vector2(0,-30), deg2rad(270))
 	get_parent().add_child(bullet)
+	bullet.player = self
 
 func _on_bulletTimer_timeout():
 	canShoot = true
 
 func takeShot():
-	health -= 1
 	get_tree().call_group("enemybullet", "beDeleted")
 	
-	if(health > 0):
-		setPlayerSprite()
-	else:
-		var redo = sceneRestart.instance()
-		get_parent().add_child(redo)
+	if (hittable):
+		health -= 1
 		
+		hitTimer.start(hitDelay)
+		hittable = false
 		
-		var sceneCamera = get_node("PlayerCamera")
-		sceneCamera.current = false
-		self.remove_child(sceneCamera)
-		get_parent().add_child(sceneCamera)
-		
-		self.queue_free()
-		get_parent().remove_child(self)
+		if(health > 0):
+			setPlayerSprite()
+		else:
+			var redo = sceneRestart.instance()
+			get_parent().add_child(redo)
+			
+			
+			var sceneCamera = get_node("PlayerCamera")
+			sceneCamera.current = false
+			self.remove_child(sceneCamera)
+			get_parent().add_child(sceneCamera)
+			
+			self.queue_free()
+			get_parent().remove_child(self)
 
 func setPlayerSprite():
 	if(health >= 5):
@@ -137,7 +162,16 @@ func winTimer():
 	winTime.start(winDelay)
 
 func doBigWin():
-	pass
+	print("did big win?")
+	fone1.visible = true
+	booTime.start(booDelay)
+
+func beHit():
+	hittable = true
+
+func BOO():
+	fone1.visible = false
+	fone2.visible = true
 
 
 
