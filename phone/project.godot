@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="phone"
-run/main_scene="res://Scenes/main1.tscn"
+run/main_scene="res://Scenes/finaldraft.tscn"
 config/icon="res://icon.png"
 
 [display]
