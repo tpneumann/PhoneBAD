@@ -29,7 +29,9 @@ func _physics_process(delta):
 	angle += spinSpeed
 	if angle >= 90:
 		angle = 0
-		
+	
+	get_node("TurretSprite").rotation = deg2rad(angle)
+	
 
 func shoot():
 	#print("pew pew" + String(rng.randf_range(1, 100)))

@@ -197,8 +197,8 @@ func BOO():
 	fone2.visible = true
 
 func playerDeath():
-	get_node("PlayerSprite").visible = false; 
-	get_node("PlayerSpriteDeath").visible = true; 
+	get_node("PlayerSprite").visible = false
+	get_node("PlayerSpriteDeath").visible = true
 	get_node("PlayerSpriteDeath").play("default", false)
 
 

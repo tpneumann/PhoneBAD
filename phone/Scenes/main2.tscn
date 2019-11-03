@@ -110,7 +110,7 @@ limit_left = -25
 limit_right = 775
 script = ExtResource( 3 )
 
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Player"]
+[node name="PlayerSpriteDeath" type="AnimatedSprite" parent="Player"]
 visible = false
 scale = Vector2( 0.15, 0.15 )
 frames = SubResource( 2 )

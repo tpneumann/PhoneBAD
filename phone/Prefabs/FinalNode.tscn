@@ -1,14 +1,14 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Prefabs/FinalNode.gd" type="Script" id=1]
-[ext_resource path="res://icon.png" type="Texture" id=2]
+[ext_resource path="res://Sprites/finalEnemySprite.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 37.5333, 39.5906 )
+extents = Vector2( 50.7659, 47.6763 )
 
 [node name="FinalNode" type="KinematicBody2D" groups=[
-"final",
 "enemy",
+"final",
 ]]
 script = ExtResource( 1 )
 
@@ -17,3 +17,4 @@ shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
+offset = Vector2( 20, 0 )
