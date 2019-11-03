@@ -171,10 +171,13 @@ position = Vector2( 174.583, -780.851 )
 position = Vector2( 581.247, -1163.87 )
 
 [node name="TurretEnemy4" parent="." instance=ExtResource( 12 )]
-position = Vector2( 364.508, -1465.18 )
+position = Vector2( 463.992, -1416.95 )
 
 [node name="MovingEnemy5" parent="." instance=ExtResource( 13 )]
-position = Vector2( 650.902, -1462.17 )
+position = Vector2( 650.902, -1477.24 )
+
+[node name="MovingEnemy10" parent="." instance=ExtResource( 13 )]
+position = Vector2( 515.242, -1811.87 )
 
 [node name="MovingEnemy6" parent="." instance=ExtResource( 13 )]
 position = Vector2( 129.362, -1955.99 )
@@ -186,10 +189,10 @@ position = Vector2( 130, -2210 )
 position = Vector2( 130, -2080 )
 
 [node name="TurretEnemy5" parent="." instance=ExtResource( 12 )]
-position = Vector2( 208.297, -2602.55 )
+position = Vector2( 253.517, -2605.56 )
 
 [node name="TurretEnemy6" parent="." instance=ExtResource( 12 )]
-position = Vector2( 341.578, -2469.27 )
+position = Vector2( 347.607, -2499.41 )
 
 [node name="TurretEnemy7" parent="." instance=ExtResource( 12 )]
 position = Vector2( 611.312, -2335.98 )
