@@ -1,18 +1,24 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=26 format=2]
 
 [ext_resource path="res://Scripts/PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/playerSprite5.png" type="Texture" id=2]
 [ext_resource path="res://Scenes/PlayerCamera.gd" type="Script" id=3]
 [ext_resource path="res://Sprites/playerDeath1.png" type="Texture" id=4]
 [ext_resource path="res://Sprites/playerDeat2.png" type="Texture" id=5]
-[ext_resource path="res://icon.png" type="Texture" id=6]
-[ext_resource path="res://Sprites/wallSprite.png" type="Texture" id=7]
-[ext_resource path="res://Sprites/wallCrossSprite.png" type="Texture" id=8]
-[ext_resource path="res://Prefabs/FinalNode.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Sprites/phoneScreen1.png" type="Texture" id=10]
-[ext_resource path="res://Sprites/phoneScreen2.png" type="Texture" id=11]
-[ext_resource path="res://Prefabs/TurretEnemy.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Prefabs/MovingEnemy.tscn" type="PackedScene" id=13]
+[ext_resource path="res://Sounds/shot.wav" type="AudioStream" id=6]
+[ext_resource path="res://Sounds/deathSound.wav" type="AudioStream" id=7]
+[ext_resource path="res://Sounds/playerHit.wav" type="AudioStream" id=8]
+[ext_resource path="res://icon.png" type="Texture" id=9]
+[ext_resource path="res://Sprites/wallSprite.png" type="Texture" id=10]
+[ext_resource path="res://Sprites/wallCrossSprite.png" type="Texture" id=11]
+[ext_resource path="res://Prefabs/FinalNode.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Sounds/alarmClock.wav" type="AudioStream" id=13]
+[ext_resource path="res://Sounds/main.wav" type="AudioStream" id=14]
+[ext_resource path="res://Sounds/enemyHit.wav" type="AudioStream" id=15]
+[ext_resource path="res://Sprites/phoneScreen1.png" type="Texture" id=16]
+[ext_resource path="res://Sprites/phoneScreen2.png" type="Texture" id=17]
+[ext_resource path="res://Prefabs/TurretEnemy.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Prefabs/MovingEnemy.tscn" type="PackedScene" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( -6, 0, 8, -5, 8, 5 )
@@ -36,7 +42,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 
 [sub_resource type="TileSet" id=6]
 0/name = "icon.png 0"
-0/texture = ExtResource( 6 )
+0/texture = ExtResource( 9 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
 0/region = Rect2( 0, 0, 64, 64 )
@@ -52,7 +58,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 } ]
 0/z_index = 0
 1/name = "wallSprite.png 1"
-1/texture = ExtResource( 7 )
+1/texture = ExtResource( 10 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )
 1/region = Rect2( 0, 0, 64, 64 )
@@ -68,7 +74,7 @@ points = PoolVector2Array( 0, 0, 64, 0, 64, 64, 0, 64 )
 } ]
 1/z_index = 0
 2/name = "wallCrossSprite.png 2"
-2/texture = ExtResource( 8 )
+2/texture = ExtResource( 11 )
 2/tex_offset = Vector2( 0, 0 )
 2/modulate = Color( 1, 1, 1, 1 )
 2/region = Rect2( 0, 0, 64, 64 )
@@ -117,6 +123,15 @@ visible = false
 scale = Vector2( 0.15, 0.15 )
 frames = SubResource( 2 )
 
+[node name="shotSound" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 6 )
+
+[node name="deathSound" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 7 )
+
+[node name="playerHit" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource( 8 )
+
 [node name="TileMap" type="TileMap" parent="." groups=[
 "wall",
 ]]
@@ -126,8 +141,18 @@ tile_data = PoolIntArray( -3080192, 1, 0, -3080191, 1, 0, -3080190, 1, 0, -30801
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
-[node name="FinalNode" parent="." instance=ExtResource( 9 )]
+[node name="FinalNode" parent="." instance=ExtResource( 12 )]
 position = Vector2( 617.64, -2852.21 )
+
+[node name="alarmSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 13 )
+
+[node name="mainSound" type="AudioStreamPlayer2D" parent="."]
+position = Vector2( 1, 0 )
+stream = ExtResource( 14 )
+
+[node name="enemyHit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 15 )
 
 [node name="GUI" type="Control" parent="."]
 margin_right = 40.0
@@ -135,67 +160,67 @@ margin_bottom = 40.0
 
 [node name="PhoneScreen1" type="TextureRect" parent="GUI"]
 visible = false
-margin_left = -24.6132
-margin_top = -232.068
+margin_left = -24.613
+margin_top = -290.0
 margin_right = 775.387
-margin_bottom = 791.932
-texture = ExtResource( 10 )
+margin_bottom = 934.0
+texture = ExtResource( 16 )
 
 [node name="PhoneScreen2" type="TextureRect" parent="GUI"]
 visible = false
 margin_left = -24.0
-margin_top = -232.0
-margin_right = 423.985
-margin_bottom = 336.985
-texture = ExtResource( 11 )
+margin_top = -290.0
+margin_right = 776.0
+margin_bottom = 734.0
+texture = ExtResource( 17 )
 
-[node name="TurretEnemy2" parent="." instance=ExtResource( 12 )]
+[node name="TurretEnemy2" parent="." instance=ExtResource( 18 )]
 position = Vector2( 186.959, -72.4011 )
 
-[node name="TurretEnemy" parent="." instance=ExtResource( 12 )]
+[node name="TurretEnemy" parent="." instance=ExtResource( 18 )]
 position = Vector2( 629.799, 34.6201 )
 
-[node name="MovingEnemy" parent="." instance=ExtResource( 13 )]
+[node name="MovingEnemy" parent="." instance=ExtResource( 19 )]
 position = Vector2( 644.714, 428.036 )
 
-[node name="MovingEnemy2" parent="." instance=ExtResource( 13 )]
+[node name="MovingEnemy2" parent="." instance=ExtResource( 19 )]
 position = Vector2( 249.315, -461.613 )
 
-[node name="TurretEnemy3" parent="." instance=ExtResource( 12 )]
+[node name="TurretEnemy3" parent="." instance=ExtResource( 18 )]
 position = Vector2( 617.741, -615.044 )
 
-[node name="MovingEnemy3" parent="." instance=ExtResource( 13 )]
+[node name="MovingEnemy3" parent="." instance=ExtResource( 19 )]
 position = Vector2( 174.583, -780.851 )
 
-[node name="MovingEnemy4" parent="." instance=ExtResource( 13 )]
+[node name="MovingEnemy4" parent="." instance=ExtResource( 19 )]
 position = Vector2( 581.247, -1163.87 )
 
-[node name="TurretEnemy4" parent="." instance=ExtResource( 12 )]
+[node name="TurretEnemy4" parent="." instance=ExtResource( 18 )]
 position = Vector2( 463.992, -1416.95 )
 
-[node name="MovingEnemy5" parent="." instance=ExtResource( 13 )]
+[node name="MovingEnemy5" parent="." instance=ExtResource( 19 )]
 position = Vector2( 650.902, -1477.24 )
 
-[node name="MovingEnemy10" parent="." instance=ExtResource( 13 )]
+[node name="MovingEnemy10" parent="." instance=ExtResource( 19 )]
 position = Vector2( 515.242, -1811.87 )
 
-[node name="MovingEnemy6" parent="." instance=ExtResource( 13 )]
+[node name="MovingEnemy6" parent="." instance=ExtResource( 19 )]
 position = Vector2( 129.362, -1955.99 )
 
-[node name="MovingEnemy8" parent="." instance=ExtResource( 13 )]
+[node name="MovingEnemy8" parent="." instance=ExtResource( 19 )]
 position = Vector2( 130, -2210 )
 
-[node name="MovingEnemy7" parent="." instance=ExtResource( 13 )]
+[node name="MovingEnemy7" parent="." instance=ExtResource( 19 )]
 position = Vector2( 130, -2080 )
 
-[node name="TurretEnemy5" parent="." instance=ExtResource( 12 )]
+[node name="TurretEnemy5" parent="." instance=ExtResource( 18 )]
 position = Vector2( 253.517, -2605.56 )
 
-[node name="TurretEnemy6" parent="." instance=ExtResource( 12 )]
+[node name="TurretEnemy6" parent="." instance=ExtResource( 18 )]
 position = Vector2( 347.607, -2499.41 )
 
-[node name="TurretEnemy7" parent="." instance=ExtResource( 12 )]
+[node name="TurretEnemy7" parent="." instance=ExtResource( 18 )]
 position = Vector2( 611.312, -2335.98 )
 
-[node name="MovingEnemy9" parent="." instance=ExtResource( 13 )]
+[node name="MovingEnemy9" parent="." instance=ExtResource( 19 )]
 position = Vector2( 650.139, -2091.12 )
