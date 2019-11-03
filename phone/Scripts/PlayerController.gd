@@ -101,6 +101,8 @@ func get_input():
 		dir.y -= 1
 		looking = true
 	
+	
+	
 	velocity = velocity.normalized()
 	dir = dir.normalized()
 	

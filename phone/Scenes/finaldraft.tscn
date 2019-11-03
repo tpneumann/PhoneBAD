@@ -130,7 +130,6 @@ tile_data = PoolIntArray( -3080192, 1, 0, -3080191, 1, 0, -3080190, 1, 0, -30801
 position = Vector2( 617.64, -2852.21 )
 
 [node name="GUI" type="Control" parent="."]
-editor/display_folded = true
 margin_right = 40.0
 margin_bottom = 40.0
 
@@ -145,7 +144,7 @@ texture = ExtResource( 10 )
 [node name="PhoneScreen2" type="TextureRect" parent="GUI"]
 visible = false
 margin_left = -24.0
-margin_top = -236.0
+margin_top = -232.0
 margin_right = 423.985
 margin_bottom = 336.985
 texture = ExtResource( 11 )
