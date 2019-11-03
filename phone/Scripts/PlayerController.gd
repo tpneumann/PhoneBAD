@@ -17,8 +17,8 @@ onready var health1 = preload("res://Sprites/playerSprite1.png")
 
 var fone1
 var fone2
-onready var death1 = preload("res://Sprites/playerDeath1.png")
-onready var death2 = preload("res://Sprites/playerDeat2.png")
+
+var isAlive = true
 
 var canShoot = true
 var bulletTimer
@@ -74,16 +74,16 @@ func _ready():
 func get_input():
 	velocity = Vector2()
 	
-	if Input.is_action_pressed('ui_right'):
+	if Input.is_action_pressed('ui_right') and isAlive:
 		velocity.x += 1
 		moving = true
-	if Input.is_action_pressed('ui_left'):
+	if Input.is_action_pressed('ui_left') and isAlive:
 		velocity.x -= 1
 		moving = true
-	if Input.is_action_pressed('ui_down'):
+	if Input.is_action_pressed('ui_down') and isAlive:
 		velocity.y += 1
 		moving = true
-	if Input.is_action_pressed('ui_up'):
+	if Input.is_action_pressed('ui_up') and isAlive:
 		velocity.y -= 1
 		moving = true
 	
@@ -105,7 +105,6 @@ func _physics_process(delta):
 	
 	
 func shoot():
-	#print("pew pew" + String(rng.randf_range(1, 100)))
 	
 	canShoot = false
 	bulletTimer.start(shotSpeed)
@@ -132,36 +131,14 @@ func takeShot():
 		
 		if(health > 0):
 			setPlayerSprite()
-		else:
-			var redo = sceneRestart.instance()
-			get_parent().add_child(redo)
-			
-			
+		elif (isAlive):
 			var sceneCamera = get_node("PlayerCamera")
 			sceneCamera.current = false
 			self.remove_child(sceneCamera)
 			get_parent().add_child(sceneCamera)
 			
-			self.queue_free()
-			get_parent().remove_child(self)
-	if(health > 0):
-		setPlayerSprite()
-	else:
-		self.playerDeath()
-		
-		##REMOVE ONCE CAMERA FIXED
-		var t = Timer.new()
-		t.set_wait_time(3)
-		t.set_one_shot(true)
-		self.add_child(t)
-		t.start()
-		yield(t, "timeout")
-		##REMOVE ONCE CAMERA FIXED
+			self.playerDeath()
 
-		var redo = sceneRestart.instance()
-		get_parent().add_child(redo)
-		self.queue_free()
-		get_parent().remove_child(self)
 
 func setPlayerSprite():
 	if(health >= 5):
@@ -197,9 +174,14 @@ func BOO():
 	fone2.visible = true
 
 func playerDeath():
+	
 	get_node("PlayerSprite").visible = false
 	get_node("PlayerSpriteDeath").visible = true
 	get_node("PlayerSpriteDeath").play("default", false)
+	
+	isAlive = false
+	var redo = sceneRestart.instance()
+	get_parent().add_child(redo)
 
 
 
