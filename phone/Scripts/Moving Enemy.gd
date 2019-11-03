@@ -59,6 +59,8 @@ func _on_bulletTimer_timeout():
 
 func takeShot():
 	health -= 1
+	get_parent().get_node("enemyHit").play()
+	
 	if health <= 0:
 		self.queue_free()
 		get_parent().remove_child(self)
