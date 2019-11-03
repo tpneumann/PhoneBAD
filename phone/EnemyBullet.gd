@@ -9,14 +9,6 @@ var velocity = Vector2()
 var activeTimer
 var timerCountdown = .1
 
-func _ready():
-	activeTimer = Timer.new()
-	activeTimer.connect("timeout",self,"_on_activeTimer_timeout") 
-	add_child(activeTimer)
-	get_node("BulletCollide").disabled = false
-	activeTimer.one_shot = true
-	activeTimer.start(timerCountdown)
-
 func fire(pos, dir):
 	rotation = dir
 	position = pos
@@ -36,12 +28,10 @@ func _physics_process(delta):
 				get_parent().remove_child(self)
 		else:
 			velocity = velocity.bounce(collision.normal)
+	
+	get_node("Sprite").visible = true
 
-func _on_activeTimer_timeout(): 
-	#get_node("BulletCollide").disabled = false
-	pass
 
 func beDeleted():
 	self.queue_free()
-	#get_parent().remove_child(self)
 

@@ -32,6 +32,7 @@ var booDelay = 1.5
 var health = 5
 
 var moving = false
+var looking = false
 
 var hittable = true
 var hitTimer
@@ -87,7 +88,21 @@ func get_input():
 		velocity.y -= 1
 		moving = true
 	
-	dir = velocity.normalized()
+	if Input.is_action_pressed('lk_right') and isAlive:
+		dir.x += 1
+		looking = true
+	if Input.is_action_pressed('lk_left') and isAlive:
+		dir.x -= 1
+		looking = true
+	if Input.is_action_pressed('lk_down') and isAlive:
+		dir.y += 1
+		looking = true
+	if Input.is_action_pressed('lk_up') and isAlive:
+		dir.y -= 1
+		looking = true
+	
+	velocity = velocity.normalized()
+	dir = dir.normalized()
 	
 	if Input.is_action_pressed('ui_accept') && canShoot:
 		shoot()
@@ -95,13 +110,12 @@ func get_input():
 func _physics_process(delta):
 	
 	moving = false
+	looking = false
 	
 	get_input()
-	if moving: 
+	if looking: 
 		get_node("PlayerSprite").rotation = dir.angle() + deg2rad(90)
-	else: 
-		get_node("PlayerSprite").rotation = deg2rad(0)
-	move_and_slide(dir * speed)
+	move_and_slide(velocity * speed)
 	
 	
 func shoot():
@@ -110,10 +124,7 @@ func shoot():
 	bulletTimer.start(shotSpeed)
 	
 	var bullet = bullet_scene.instance()
-	if (moving):
-		bullet.fire(self.position + dir * 30, dir.angle())
-	else:
-		bullet.fire(self.position + Vector2(0,-30), deg2rad(270))
+	bullet.fire(self.position + dir * 30, dir.angle())
 	get_parent().add_child(bullet)
 	bullet.player = self
 
